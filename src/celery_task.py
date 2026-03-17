@@ -1,9 +1,10 @@
 from celery import Celery
 from src.mails import mail, create_message
 from asgiref.sync import async_to_sync
+from src.config import Config
 
 c_app = Celery(
-    "tasks", broker="redis://localhost:6379/0", backend="redis://localhost:6379/0"
+    "tasks", broker=Config.REDIS_URL, backend=Config.REDIS_URL
 )
 
 c_app.config_from_object("src.config")
