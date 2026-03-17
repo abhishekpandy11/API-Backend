@@ -20,7 +20,15 @@ def registor_middleware(app: FastAPI):
         allow_credentials=True,
     )
 
-    app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
+    app.add_middleware(
+    TrustedHostMiddleware, 
+    allowed_hosts=[
+        "localhost", 
+        "127.0.0.1", 
+        "api-backend-nkgk.onrender.com",  # 'https://' aur trailing '/' hata dein
+        "*.onrender.com"                  # Backup ke liye wildcard
+    ]
+)
 
     # 2. Custom Logging Middleware
     @app.middleware("http")

@@ -37,6 +37,10 @@ app = FastAPI(
 register_all_errors(app)
 registor_middleware(app)
 
+@app.get("/")
+async def root():
+    return {"message": "API is running!"}
+
 app.include_router(book_router, prefix=f"/api/{version}/books", tags=["books"])
 app.include_router(auth_router, prefix=f"/api/{version}/auth", tags=["auth"])
 app.include_router(review_router, prefix=f"/api/{version}/reviews", tags=["reviews"])
